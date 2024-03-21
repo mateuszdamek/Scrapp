@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Cenomania</title>
+    <script>
+        function displayVertical() {
+            var productContainer = document.getElementById('product-container');
+            var square = document.getElementsByClassName('square');
+            productContainer.style.flexDirection = 'column';
+            productContainer.style.marginLeft = '20px';
+            for (var i = 0; i < squares.length; i++) {
+                squares[i].style.width = '100%';
+            }
+        }
+
+        function displayHorizontal() {
+            document.getElementById('product-container').style.flexDirection = 'row';
+        }
+    </script>
+</head>
+<body>
+<header class="site-header">
+    <div class="site-identity">
+        <img class="logo" src="https://cdn-icons-png.freepik.com/512/4379/4379619.png" alt="Logo">
+        <h1><a href="#">Cenomania</a></h1>
+    </div>
+    <nav class="site-navigation">
+        <ul>
+            <li><a href="#">Kategorie</a></li>
+            <li><a href="#">Promocje</a></li>
+            <li><a href="#">Kontakt</a></li>
+        </ul>
+    </nav>
+    <form action="/" method="POST" class="search-box">
+        <input type="text" name="query" placeholder="Szukaj...">
+        <button type="submit">Szukaj</button>
+    </form>
+</header>
+<h2>Produkty pobrane ze strony skapiec.pl</h2>
+<button onclick="displayVertical()">Display Vertical</button>
+<button onclick="displayHorizontal()">Display Horizontal</button>
+<div id="product-container" class="container">
+    {% for product in products %}
+        <div class="square">
+            <img src="{{ product[4] }}" alt="{{ product[1] }}" style="max-width: 100%; max-height: 100%;">
+            <a href="{{ product[3] }}">{{ product[1] }}</a>
+            <p>{{ product[2] }}</p> <!-- Cena pod nazwą produktu -->
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>
